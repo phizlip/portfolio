@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./fonts/SpaceMono-Regular.ttf') format('truetype');
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Space Mono', Arial, sans-serif;
+}
+
+.cursor {
+  position: fixed;
+  top: -50px; /*-50 makes it start off screen*/
+  left: -50px;
+  width: 22px;
+  height: 22px;
+  border: 3px solid black;
+  border-radius: 50%;
+  background-color: white;
+  pointer-events: none;
+  z-index: 2; /* cursor is above EVERYTHING*/
+}
+
+.cursor.clicked {
+  background-color: grey; /*cursor grey on click*/
+}
+
+#curtains {
+  display: flex;
+  height: 100%;
+}
+
+.curtain {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: flex-grow 0.66666s, filter 0.3s ease; /* Add transition for flex-grow and filter */
+  cursor: none; /*hides system cursor*/
+  position: relative;
+}
+
+.curtain.keyboard-focus {
+  box-shadow: inset 0 0 0 20px #ffffff;
+}
+
+.curtain::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  --brightness-initial: 0.66666; /* starting brightness value */
+  --brightness-hover: 1; /* on hover brightness value */
+  transition: filter 0.3s ease; 
+  z-index: -1; /* Make sure it's behind content */
+}
+
+#about::before {
+  background-image: url(images/yw091n5dweo01.png);
+  filter: brightness(var(--brightness-initial)); /* Use CSS variable, set to the initial brightness */
+}
+/* https://www.reddit.com/r/evansville/comments/87o984/last_night_main_st_looking_towards_the_lloyd/, picture of evansville I used */
+
+#projects::before {
+  background-image: url(images/code_text_colorful_140555_1080x1920.jpg);
+  filter: brightness(var(--brightness-initial));
+}
+
+#contact::before {
+  background-image: url(images/contact.jpeg);
+  filter: brightness(var(--brightness-initial));
+}
+/* Bing Image Generator used for contact image */
+
+h1 {
+  font-size: 3rem;
+  margin: 0;
+  padding: 1rem;
+  position: relative;
+  z-index: 1; /* Ensure h1 is above pseudo-elements */
+  color:white !important; /*MAKES SURE TEXT IS ALWAYS WHITE*/
+}
+
+.curtain:hover {
+  flex-grow: 1.4; /* basically makes curtains grow */
+}
+
+.curtain:hover::before {
+  --brightness-initial: var(--brightness-hover); /* make brightness update */
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none; /* no link color lol*/
+  color: inherit;
+}
+
+.made-by {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-decoration: none;
+  color: black;
+  cursor: none;
+}
+
+.made-by:hover {
+  background-color: lightgray;
+}
